@@ -1,10 +1,6 @@
 ---
 - hosts: all
   tasks:
-#  - name: update packages
-#    dnf:
-#      name: "*"
-#      state: latest
   - name: Install epel
     dnf:
       name: epel-release
@@ -42,10 +38,3 @@
         - python3-PyMySQL
         - iperf3
         - omping
-#  - name: Install MariaDB server
-#    dnf:
-#      name: MariaDB-server
-#      disablerepo: AppStream
-#  - name: Autoremove unneeded packages
-#    dnf:
-#      autoremove: yes
