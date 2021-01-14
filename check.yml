@@ -1,0 +1,23 @@
+---
+- hosts: all
+  tasks:
+  - name: Check for wsrep_on setting
+    mysql_variables:
+      login_unix_socket: /var/lib/mysql/mysql.sock
+      variable: wsrep_on
+
+  - name: Check for wsrep_cluster_address setting
+    mysql_variables:
+      login_unix_socket: /var/lib/mysql/mysql.sock
+      variable: wsrep_cluster_address
+
+  - name: Check for wsrep_sst_method setting
+    mysql_variables:
+      login_unix_socket: /var/lib/mysql/mysql.sock
+      variable: wsrep_sst_method
+
+  - name: Check for wsrep_provider_options setting
+    mysql_variables:
+      login_unix_socket: /var/lib/mysql/mysql.sock
+      variable: wsrep_provider_options
+

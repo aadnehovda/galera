@@ -1,0 +1,51 @@
+---
+- hosts: all
+  tasks:
+#  - name: update packages
+#    dnf:
+#      name: "*"
+#      state: latest
+  - name: Install epel
+    dnf:
+      name: epel-release
+  - name: Disable default MariaDB module
+    ini_file:
+      path: /etc/dnf/modules.d/mariadb.module
+      section: mariadb
+      option: state
+      value: disabled
+      no_extra_spaces: yes
+  - name: Install MariaDB repo
+    yum_repository:
+      name: MariaDB
+      baseurl: https://yum.mariadb.org/10.5/centos/$releasever/$basearch
+      description: MariaDB
+      gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+  - name: Set module_hotfixes=true in MariaDB.repo
+    ini_file:
+      path: /etc/yum.repos.d/MariaDB.repo
+      section: MariaDB
+      option: module_hotfixes
+      value: "true"
+  - name: Install packages
+    dnf:
+      name:
+        - htop
+        - bash-completion
+        - less
+        - galera-4
+        - hostname
+        - vim
+        - socat
+        - MariaDB-backup
+        - MariaDB-server
+        - python3-PyMySQL
+        - iperf3
+        - omping
+#  - name: Install MariaDB server
+#    dnf:
+#      name: MariaDB-server
+#      disablerepo: AppStream
+#  - name: Autoremove unneeded packages
+#    dnf:
+#      autoremove: yes

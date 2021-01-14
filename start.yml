@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+  - name: Start server
+    systemd:
+      name: mariadb.service
+      enabled: yes
+      state: started
